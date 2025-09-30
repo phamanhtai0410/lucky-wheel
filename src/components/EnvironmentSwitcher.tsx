@@ -47,9 +47,9 @@ const EnvironmentSwitcher: React.FC = () => {
   };
 
   // Only show in development mode
-  if (process.env.NODE_ENV === 'production') {
-    return null;
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   return null;
+  // }
 
   return (
     <div className="fixed top-4 left-4 z-50">
