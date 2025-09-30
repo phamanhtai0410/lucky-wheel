@@ -129,7 +129,8 @@ const LuckyWheelGame = () => {
         walletId: selectedSpecificWallet?.id || "", // EOA wallet ID
       };
 
-      const response = await fetch(`${getBundlerEndpoint()}${apiEndpoint}/send`, {
+      const apiName = isSmartAccount ? "send" : "sign-and-send-transaction";
+      const response = await fetch(`${getBundlerEndpoint()}${apiEndpoint}/${apiName}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
