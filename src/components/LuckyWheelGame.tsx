@@ -28,7 +28,7 @@ import EnvironmentSwitcher from "./EnvironmentSwitcher";
 
 const LuckyWheelGame = () => {
   const {isAuthenticated, user, isLoading: authLoading, logout} = useAuth();
-  const {selectedWallet, getAPIEndpoint, setUserWallets} = useWallet();
+  const {selectedWallet, selectedSpecificWallet, getAPIEndpoint, setUserWallets} = useWallet();
   const {toast} = useToast();
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<GameResult | null>(null);
@@ -116,7 +116,7 @@ const LuckyWheelGame = () => {
           data: txRequest.data,
           maxPriorityFeePerGas: "1800000000",
         },
-        smartAccountId: "35a8d3e6-e163-4f54-a584-d21a85557d3e",
+        smartAccountId: selectedSpecificWallet?.id || "", // Smart Account ID
       } : {
         chainId: chainId,
         sponsor: true,
@@ -126,7 +126,7 @@ const LuckyWheelGame = () => {
           data: txRequest.data,
           maxPriorityFeePerGas: "1800000000",
         },
-        walletId: "633511c9-53f4-4101-b229-aec0bd5a96fe", // EOA wallet ID
+        walletId: selectedSpecificWallet?.id || "", // EOA wallet ID
       };
 
       const response = await fetch(`${getBundlerEndpoint()}${apiEndpoint}/send`, {
