@@ -124,7 +124,9 @@ const LuckyWheelGame = () => {
           to: txRequest.to,
           value: "0",
           data: txRequest.data,
-          maxPriorityFeePerGas: "1800000000",
+          maxPriorityFeePerGas: "18000000000",
+          maxFeePerGas: "20000000000",
+          gasLimit: "22000",
         },
         walletId: selectedSpecificWallet?.id || "", // EOA wallet ID
       };
