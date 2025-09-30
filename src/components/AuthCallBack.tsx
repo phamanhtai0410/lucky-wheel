@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import { API_KEY, BUNDLER_ENDPOINT } from '@/constants/constant';
+import { getApiKey, getBundlerEndpoint } from '@/constants/constant';
 
 const AuthCallback = () => {
   const [status, setStatus] = useState('Processing authentication...');
@@ -34,14 +34,14 @@ const AuthCallback = () => {
           provider = 'telegram'
         }
 
-        console.log("BUNDLER_ENDPOINT: ", BUNDLER_ENDPOINT)
+        console.log("BUNDLER_ENDPOINT: ", getBundlerEndpoint())
 
         // Call your backend
-        const response = await fetch(`${BUNDLER_ENDPOINT}auth/${provider}/callback`, {
+        const response = await fetch(`${getBundlerEndpoint()}auth/${provider}/callback`, {
           method: 'POST',
           headers: {
             "Content-Type": 'application/json',
-            "x-api-key": API_KEY,
+            "x-api-key": getApiKey(),
             "x-timestamp": `${Date.now()}`,
           },
           body: JSON.stringify({ code, state })

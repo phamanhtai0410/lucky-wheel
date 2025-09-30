@@ -1,28 +1,28 @@
-import {API_KEY, BUNDLER_ENDPOINT, SECRET_KEY} from "@/constants/constant";
+import { getApiKey, getBundlerEndpoint, getSecretKey} from "@/constants/constant";
 import { useWallet } from "@/contexts/WalletContext";
 import { WalletType } from "@/types/wallet";
 
 export default function SignMessage() {
-  const { selectedWallet, getAPIEndpoint } = useWallet();
+  const { selectedWallet, selectedSpecificWallet, getAPIEndpoint } = useWallet();
   async function signMessage() {
     const chainId = 2484;
     const apiEndpoint = getAPIEndpoint();
     const response = await fetch(
-      `${BUNDLER_ENDPOINT}${apiEndpoint}/sign-message`,
+      `${getBundlerEndpoint()}${apiEndpoint}/sign-message`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "x-api-key": API_KEY,
-          "x-secret-key": SECRET_KEY,
+          "x-api-key": getApiKey(),
+          "x-secret-key": getSecretKey(),
         },
         body: JSON.stringify({
           chainId: chainId,
           sponsor: true,
           message: "Hello, world!",
-          appApiKey: API_KEY,
-          walletId: selectedWallet === WalletType.EOA_WALLET ? '633511c9-53f4-4101-b229-aec0bd5a96fe' : undefined,
+          appApiKey: getApiKey(),
+          walletId: selectedWallet === WalletType.EOA_WALLET ? selectedSpecificWallet?.id : undefined,
         }),
       }
     );
@@ -33,21 +33,21 @@ export default function SignMessage() {
     const chainId = 2484;
     const apiEndpoint = getAPIEndpoint();
     const response = await fetch(
-      `${BUNDLER_ENDPOINT}${apiEndpoint}/verify-message`,
+      `${getBundlerEndpoint()}${apiEndpoint}/verify-message`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "x-api-key": API_KEY,
-          "x-secret-key": SECRET_KEY,
+          "x-api-key": getApiKey(),
+          "x-secret-key": getSecretKey(),
         },
         body: JSON.stringify({
           chainId: chainId,
           message: "Hello, world!",
           signature:
             "0xa8ec61074223dd6492769c838090e5e017a82921768da5b85d11d5698a5da6a8650039ee7420cb7013499a46d89a7dba7ef2a2bb881ef6aded96b83c2990d79e1b",
-          appApiKey: API_KEY,
+          appApiKey: getApiKey(),
         }),
       }
     );
