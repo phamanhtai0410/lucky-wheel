@@ -10,6 +10,11 @@ export interface UserData {
   avatar?: string;
   embedded_wallets?: EmbeddedWallet[];
   smart_accounts?: SmartAccount[];
+  oauthProvider?: {
+    name: string;
+    icon: string;
+    color: string;
+  };
 }
 
 export function useAuth() {
@@ -50,6 +55,19 @@ export function useAuth() {
           }else if (userData.telegramFirstName) {
             firstName = userData.telegramFirstName
           }
+          
+          // Detect OAuth provider
+          let oauthProvider = undefined;
+          if (userData.googleFirstName || userData.googleLastName || userData.googleAvatarUrl) {
+            oauthProvider = { name: 'Google', icon: '🔍', color: 'bg-red-100 text-red-800' };
+          } else if (userData.twitterFirstName || userData.twitterLastName || userData.twitterAvatarUrl) {
+            oauthProvider = { name: 'Twitter', icon: '🐦', color: 'bg-blue-100 text-blue-800' };
+          } else if (userData.facebookFirstName || userData.facebookLastName || userData.facebookAvatarUrl) {
+            oauthProvider = { name: 'Facebook', icon: '📘', color: 'bg-blue-100 text-blue-800' };
+          } else if (userData.telegramFirstName || userData.telegramLastName) {
+            oauthProvider = { name: 'Telegram', icon: '✈️', color: 'bg-sky-100 text-sky-800' };
+          }
+          
           const avatarUrl = userData.googleAvatarUrl ? userData.googleAvatarUrl : (userData.twitterAvatarUrl ? userData.twitterAvatarUrl : userData.facebookAvatarUrl) || ''
           setUser({
             id: userData.id,
@@ -59,6 +77,7 @@ export function useAuth() {
             avatar: avatarUrl,
             embedded_wallets: userData.embedded_wallets || [],
             smart_accounts: userData.smart_accounts || [],
+            oauthProvider,
           });
           setIsAuthenticated(true);
         } catch (error) {

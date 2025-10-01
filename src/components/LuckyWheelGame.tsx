@@ -279,7 +279,14 @@ const LuckyWheelGame = () => {
                   {user?.name?.charAt(0).toUpperCase() || "U"}
                 </span>
               </div>
-              <span className="text-sm font-medium">{user?.name}</span>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium">{user?.name}</span>
+                {user?.oauthProvider && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${user.oauthProvider.color}`}>
+                    {user.oauthProvider.icon} via {user.oauthProvider.name}
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
