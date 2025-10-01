@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Lucky Wheel Game',
-  description: 'LayerG lucky wheel game with Universal Account',
+  description: 'U3ID lucky wheel game with Universal Account',
 };
 
 
