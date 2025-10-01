@@ -13,18 +13,19 @@ const ENVIRONMENT_CONFIGS: EnvironmentConfigs = {
     TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_dev_bot?start=login-1-romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
     API_KEY: "romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
     SECRET_KEY: "rtengzStS0NwWbo0PEabitiBWWqW7CloUkh1ckWvcpIlVP4jxvOvOp0WixdQ-lkhOVHf5-QiI4Cp_5B-fGKHAQ"
-  },[Environment.STAGING]: {
-    BUNDLER_ENDPOINT: "http://localhost:3003/api/v3/",
-    TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_dev_bot?start=login-1-romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
-    API_KEY: "romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
-    SECRET_KEY: "rtengzStS0NwWbo0PEabitiBWWqW7CloUkh1ckWvcpIlVP4jxvOvOp0WixdQ-lkhOVHf5-QiI4Cp_5B-fGKHAQ"
   },
   // [Environment.STAGING]: {
-  //   BUNDLER_ENDPOINT: "https://api-stg.u3id.io/api/v3/",
-  //   TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_stg_bot?start=login-1-JYcLrlBf53Uxr70eBEqKi8Fzda-UMeKnDHdju_qaYTk",
-  //   API_KEY: "JYcLrlBf53Uxr70eBEqKi8Fzda-UMeKnDHdju_qaYTk",
-  //   SECRET_KEY: "ZK_Sp1gHsABqUF6f3MB4XieOSPKrHlyelkli30nmWorPDKZREWSZoZNkyQooCTfSsRg1C9DpcaGYz6D_0VL_OQ"
+  //   BUNDLER_ENDPOINT: "http://localhost:3003/api/v3/",
+  //   TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_dev_bot?start=login-1-romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
+  //   API_KEY: "romEr6NRmjOhuJ8n2nIngTzE-zeH20UcjfyjTetsyVE",
+  //   SECRET_KEY: "rtengzStS0NwWbo0PEabitiBWWqW7CloUkh1ckWvcpIlVP4jxvOvOp0WixdQ-lkhOVHf5-QiI4Cp_5B-fGKHAQ"
   // },
+  [Environment.STAGING]: {
+    BUNDLER_ENDPOINT: "https://api-stg.u3id.io/api/v3/",
+    TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_stg_bot?start=login-1-JYcLrlBf53Uxr70eBEqKi8Fzda-UMeKnDHdju_qaYTk",
+    API_KEY: "JYcLrlBf53Uxr70eBEqKi8Fzda-UMeKnDHdju_qaYTk",
+    SECRET_KEY: "ZK_Sp1gHsABqUF6f3MB4XieOSPKrHlyelkli30nmWorPDKZREWSZoZNkyQooCTfSsRg1C9DpcaGYz6D_0VL_OQ"
+  },
   [Environment.LOCAL]: {
     BUNDLER_ENDPOINT: "http://localhost:3003/api/v3/",
     TELEGRAM_REDIRECT_BOT: "https://t.me/layerg_ua_verification_dev_bot?start=login-1-tNSgo3zmkaxQTi4iKupFQ-wDDxq2MN4Foq7zrgalilU",
