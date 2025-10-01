@@ -25,11 +25,29 @@ import WalletSelector from "./WalletSelector";
 import { useWallet } from "@/contexts/WalletContext";
 import { WalletType } from "@/types/wallet";
 import EnvironmentSwitcher from "./EnvironmentSwitcher";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle, faTwitter, faFacebookF, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 const LuckyWheelGame = () => {
   const {isAuthenticated, user, isLoading: authLoading, logout} = useAuth();
   const {selectedWallet, selectedSpecificWallet, getAPIEndpoint, setUserWallets} = useWallet();
   const {toast} = useToast();
+
+  // Helper function to get the appropriate FontAwesome icon
+  const getOAuthIcon = (providerName: string) => {
+    switch (providerName?.toLowerCase()) {
+      case 'google':
+        return <FontAwesomeIcon icon={faGoogle} className="w-4 h-4" />;
+      case 'twitter':
+        return <FontAwesomeIcon icon={faTwitter} className="w-4 h-4" />;
+      case 'facebook':
+        return <FontAwesomeIcon icon={faFacebookF} className="w-4 h-4" />;
+      case 'telegram':
+        return <FontAwesomeIcon icon={faTelegram} className="w-4 h-4" />;
+      default:
+        return <span className="w-4 h-4 text-center">🔗</span>;
+    }
+  };
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<GameResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -279,24 +297,26 @@ const LuckyWheelGame = () => {
                   {user?.name?.charAt(0).toUpperCase() || "U"}
                 </span>
               </div>
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <span className="text-sm font-medium">{user?.name}</span>
                 {user?.oauthProvider && (
                   <span className={`text-xs px-2 py-0.5 rounded-full ${user.oauthProvider.color}`}>
                     {user.oauthProvider.icon} via {user.oauthProvider.name}
                   </span>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
-                {user?.walletAddress
-                  ? `Wallet: ${user.walletAddress.slice(
-                      0,
-                      6
-                    )}...${user.walletAddress.slice(-4)}`
-                  : "Wallet connected"}
+              <span className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                {user?.oauthProvider ? (
+                  <>
+                    {getOAuthIcon(user.oauthProvider.name)}
+                    Connected via {user.oauthProvider.name}
+                  </>
+                ) : (
+                  "Connected"
+                )}
               </span>
               <button
                 onClick={logout}

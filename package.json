@@ -19,6 +19,9 @@
     "setup-test-credentials": "./scripts/setup-test-credentials.sh"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-brands-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
     "@layerg-ua-sdk/aa-sdk": "^0.0.10",
     "axios": "^1.10.0",
     "ethers": "^5.7.0",

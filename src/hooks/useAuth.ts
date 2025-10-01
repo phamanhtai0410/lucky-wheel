@@ -56,16 +56,29 @@ export function useAuth() {
             firstName = userData.telegramFirstName
           }
           
-          // Detect OAuth provider
+          // Detect OAuth provider from linked_accounts
           let oauthProvider = undefined;
-          if (userData.googleFirstName || userData.googleLastName || userData.googleAvatarUrl) {
-            oauthProvider = { name: 'Google', icon: '🔍', color: 'bg-red-100 text-red-800' };
-          } else if (userData.twitterFirstName || userData.twitterLastName || userData.twitterAvatarUrl) {
-            oauthProvider = { name: 'Twitter', icon: '🐦', color: 'bg-blue-100 text-blue-800' };
-          } else if (userData.facebookFirstName || userData.facebookLastName || userData.facebookAvatarUrl) {
-            oauthProvider = { name: 'Facebook', icon: '📘', color: 'bg-blue-100 text-blue-800' };
-          } else if (userData.telegramFirstName || userData.telegramLastName) {
-            oauthProvider = { name: 'Telegram', icon: '✈️', color: 'bg-sky-100 text-sky-800' };
+          if (userData.linked_accounts && userData.linked_accounts.length > 0) {
+            const linkedAccount = userData.linked_accounts[0]; // Get the first linked account
+            const accountType = linkedAccount.type?.toLowerCase();
+            
+            if (accountType?.includes('google')) {
+              oauthProvider = { name: 'Google', icon: 'fa-brands fa-google', color: 'bg-red-100 text-red-800' };
+            } else if (accountType?.includes('twitter')) {
+              oauthProvider = { name: 'Twitter', icon: 'fa-brands fa-twitter', color: 'bg-blue-100 text-blue-800' };
+            } else if (accountType?.includes('facebook')) {
+              oauthProvider = { name: 'Facebook', icon: 'fa-brands fa-facebook', color: 'bg-blue-100 text-blue-800' };
+            } else if (accountType?.includes('telegram')) {
+              oauthProvider = { name: 'Telegram', icon: 'fa-brands fa-telegram', color: 'bg-sky-100 text-sky-800' };
+            } else {
+              // Fallback for unknown providers
+              const providerName = accountType?.replace('_oauth', '').replace('_', ' ');
+              oauthProvider = { 
+                name: providerName || 'Unknown', 
+                icon: '🔗', 
+                color: 'bg-gray-100 text-gray-800' 
+              };
+            }
           }
           
           const avatarUrl = userData.googleAvatarUrl ? userData.googleAvatarUrl : (userData.twitterAvatarUrl ? userData.twitterAvatarUrl : userData.facebookAvatarUrl) || ''
@@ -73,7 +86,6 @@ export function useAuth() {
             id: userData.id,
             email: userData.email,
             name: `${lastName} ${firstName}`,
-            walletAddress: `${userData.eoaWallet}`,
             avatar: avatarUrl,
             embedded_wallets: userData.embedded_wallets || [],
             smart_accounts: userData.smart_accounts || [],
